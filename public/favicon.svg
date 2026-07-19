@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">Sasakiのブログ アイコン</title><desc id="desc">一本の軌道と彗星核で描いたミニマルな彗星アイコン</desc>
+<defs><linearGradient id="trail" x1="56" y1="427" x2="346" y2="129" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#073B5C" stop-opacity="0"/><stop offset=".55" stop-color="#075985"/><stop offset="1" stop-color="#00A8D6"/></linearGradient></defs>
+<path d="M44 431C126 301 218 211 349 147" fill="none" stroke="url(#trail)" stroke-width="34" stroke-linecap="round"/>
+<path d="M78 445C183 361 270 304 382 262" fill="none" stroke="#00A8D6" stroke-width="9" stroke-linecap="round" opacity=".7"/>
+<path d="M313 173C326 111 391 76 449 100C503 122 524 184 501 238C477 294 412 318 357 292C306 268 300 224 313 173Z" fill="#073B5C" transform="translate(-28 -6)"/>
+<path d="M321 160C337 128 372 112 405 122" fill="none" stroke="#22D3EE" stroke-width="18" stroke-linecap="round"/>
+<circle cx="434" cy="105" r="10" fill="#22D3EE"/>
+<path d="M434 74V136M403 105H465" stroke="#22D3EE" stroke-width="7" stroke-linecap="round" opacity=".72"/>
+</svg>

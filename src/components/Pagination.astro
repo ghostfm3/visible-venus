@@ -1,0 +1,109 @@
+---
+interface Props {
+  totalItems: number;
+  pageSize: number;
+}
+
+const { totalItems, pageSize } = Astro.props;
+const totalPages = Math.max(1, Math.ceil(totalItems / pageSize));
+const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+---
+
+<nav
+  class="mt-10 flex items-center justify-center gap-2"
+  aria-label="記事一覧のページ移動"
+  data-pagination
+  data-page-size={pageSize}
+  data-total-pages={totalPages}
+>
+  <button
+    type="button"
+    class="rounded-full border border-cyan-400/20 bg-slate-900/70 px-4 py-2 font-mono text-xs text-cyan-200 transition-all duration-300 hover:border-cyan-300/60 hover:bg-cyan-950/50 disabled:cursor-not-allowed disabled:border-slate-800 disabled:bg-transparent disabled:text-slate-700"
+    data-pagination-prev
+  >← PREV</button>
+
+  {pages.map((page) => (
+    <button
+      type="button"
+      class="flex size-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900/70 font-mono text-xs text-slate-400 transition-all duration-300 hover:border-cyan-400/50 hover:text-cyan-200 data-[active=true]:border-cyan-300 data-[active=true]:bg-cyan-400/20 data-[active=true]:text-white data-[active=true]:shadow-[0_0_18px_rgba(34,211,238,0.25)]"
+      data-pagination-page={page}
+      data-active={page === 1 ? "true" : "false"}
+      aria-current={page === 1 ? "page" : undefined}
+    >{page}</button>
+  ))}
+
+  <button
+    type="button"
+    class="rounded-full border border-cyan-400/20 bg-slate-900/70 px-4 py-2 font-mono text-xs text-cyan-200 transition-all duration-300 hover:border-cyan-300/60 hover:bg-cyan-950/50 disabled:cursor-not-allowed disabled:border-slate-800 disabled:bg-transparent disabled:text-slate-700"
+    data-pagination-next
+  >NEXT →</button>
+</nav>
+
+<script>
+  const pagination = document.querySelector<HTMLElement>("[data-pagination]");
+
+  if (pagination) {
+    const pageSize = Number(pagination.dataset.pageSize);
+    const totalPages = Number(pagination.dataset.totalPages);
+    const items = [...document.querySelectorAll<HTMLElement>("[data-pagination-item]")];
+    const pageButtons = [...pagination.querySelectorAll<HTMLButtonElement>("[data-pagination-page]")];
+    const previousButton = pagination.querySelector<HTMLButtonElement>("[data-pagination-prev]");
+    const nextButton = pagination.querySelector<HTMLButtonElement>("[data-pagination-next]");
+    let currentPage = 1;
+
+    const renderPage = (requestedPage: number, animate: boolean, updateHistory: boolean) => {
+      currentPage = Math.min(Math.max(requestedPage, 1), totalPages);
+      const firstIndex = (currentPage - 1) * pageSize;
+      const lastIndex = firstIndex + pageSize;
+
+      items.forEach((item, index) => {
+        const isVisible = index >= firstIndex && index < lastIndex;
+
+        if (!isVisible) {
+          item.classList.add("hidden");
+          return;
+        }
+
+        item.classList.remove("hidden");
+        if (animate) {
+          item.classList.remove("opacity-100", "translate-y-0");
+          item.classList.add("opacity-0", "translate-y-3");
+          window.requestAnimationFrame(() => {
+            item.classList.remove("opacity-0", "translate-y-3");
+            item.classList.add("opacity-100", "translate-y-0");
+          });
+        }
+      });
+
+      pageButtons.forEach((button) => {
+        const isCurrent = Number(button.dataset.paginationPage) === currentPage;
+        button.dataset.active = String(isCurrent);
+        if (isCurrent) button.setAttribute("aria-current", "page");
+        else button.removeAttribute("aria-current");
+      });
+
+      if (previousButton) previousButton.disabled = currentPage === 1;
+      if (nextButton) nextButton.disabled = currentPage === totalPages;
+
+      if (updateHistory) {
+        const url = new URL(window.location.href);
+        if (currentPage === 1) url.searchParams.delete("page");
+        else url.searchParams.set("page", String(currentPage));
+        window.history.pushState({ page: currentPage }, "", url);
+      }
+    };
+
+    previousButton?.addEventListener("click", () => renderPage(currentPage - 1, true, true));
+    nextButton?.addEventListener("click", () => renderPage(currentPage + 1, true, true));
+    pageButtons.forEach((button) => {
+      button.addEventListener("click", () => renderPage(Number(button.dataset.paginationPage), true, true));
+    });
+    window.addEventListener("popstate", () => {
+      const page = Number(new URL(window.location.href).searchParams.get("page")) || 1;
+      renderPage(page, true, false);
+    });
+
+    const initialPage = Number(new URL(window.location.href).searchParams.get("page")) || 1;
+    renderPage(initialPage, false, false);
+  }
+</script>

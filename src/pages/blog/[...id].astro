@@ -1,0 +1,74 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+    (a, b) =>
+      b.data.publishedAt.getTime() - a.data.publishedAt.getTime() ||
+      a.id.localeCompare(b.id),
+  );
+
+  return posts.map((post, index) => ({
+    params: { id: post.id },
+    props: {
+      post,
+      previousPost: posts[index + 1],
+      nextPost: posts[index - 1],
+    },
+  }));
+}
+
+const { post, previousPost, nextPost } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | Simple Blog`} description={post.data.description}>
+  <article class="rounded-3xl border border-cyan-400/15 bg-slate-900/60 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.32)] backdrop-blur-md sm:p-9">
+    <a class="font-mono text-xs font-bold tracking-wider text-cyan-400 transition-colors hover:text-cyan-200" href="/">← 一覧に戻る</a>
+    <header class="mt-6 border-b border-cyan-400/15 pb-8">
+      <h1 class="font-mono text-4xl font-bold tracking-tight text-white">{post.data.title}</h1>
+      <time class="mt-4 block font-mono text-xs tracking-wider text-cyan-400">
+        {post.data.publishedAt.toLocaleDateString("ja-JP")}
+      </time>
+      <div class="mt-4 flex flex-wrap gap-2">
+        {post.data.tags.map((tag) => (
+          <a class="rounded-full border border-slate-700 bg-slate-950/50 px-3 py-1 font-mono text-xs text-slate-400 transition-all hover:border-cyan-400/50 hover:text-cyan-200" href={`/tags/${encodeURIComponent(tag)}/`}>
+            #{tag}
+          </a>
+        ))}
+      </div>
+    </header>
+    <div class="prose prose-invert mt-8 max-w-none prose-headings:font-mono prose-headings:text-slate-50 prose-p:text-slate-300 prose-a:text-cyan-300 prose-strong:text-white prose-li:text-slate-300">
+      <Content />
+    </div>
+
+    <section class="mt-12 flex items-center gap-4 rounded-2xl border border-cyan-400/15 bg-slate-950/55 p-5">
+        <img
+          src="/17695841732082.jpg"
+          alt="著者のプロフィール画像"
+          class="flex size-12 shrink-0 items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-400/10 text-xl text-cyan-200 shadow-[0_0_24px_rgba(34,211,238,0.15)]"
+        />
+      <div>
+        <p class="font-mono text-xs tracking-wider text-cyan-400">Author</p>
+        <p class="mt-1 font-mono font-bold text-white">{post.data.author}</p>
+        <p class="mt-1 text-sm text-slate-400">変なもん作ったり、イコちゃんとぶらぶらしてる基地外</p>
+      </div>
+    </section>
+
+    <nav class="mt-8 grid gap-4 sm:grid-cols-2" aria-label="前後の記事">
+      {previousPost ? (
+        <a class="rounded-2xl border border-cyan-400/15 bg-slate-950/50 p-4 transition-all hover:border-cyan-300/40 hover:bg-cyan-950/30" href={`/blog/${previousPost.id}/`}>
+          <span class="font-mono text-xs text-cyan-400">← 前の記事</span>
+          <span class="mt-1 block font-mono font-bold text-slate-100">{previousPost.data.title}</span>
+        </a>
+      ) : <div />}
+      {nextPost && (
+        <a class="rounded-2xl border border-cyan-400/15 bg-slate-950/50 p-4 text-right transition-all hover:border-cyan-300/40 hover:bg-cyan-950/30" href={`/blog/${nextPost.id}/`}>
+          <span class="font-mono text-xs text-cyan-400">次の記事 →</span>
+          <span class="mt-1 block font-mono font-bold text-slate-100">{nextPost.data.title}</span>
+        </a>
+      )}
+    </nav>
+  </article>
+</Layout>

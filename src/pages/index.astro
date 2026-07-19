@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Pagination from "../components/Pagination.astro";
+import PostCard from "../components/PostCard.astro";
+
+const PAGE_SIZE = 3;
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) =>
+    b.data.publishedAt.getTime() - a.data.publishedAt.getTime() ||
+    a.id.localeCompare(b.id),
+);
+---
+
+<Layout title="Sasakiのblog">
+  <div class="mb-6 flex items-end justify-between">
+    <div>
+      <p class="font-mono text-xs font-bold tracking-[0.24em] text-cyan-400">Article List</p>
+      <h2 class="mt-1 font-mono text-3xl font-bold text-white">記事一覧</h2>
+    </div>
+  </div>
+
+  <div class="space-y-6" id="article-list">
+    {posts.map((post, index) => (
+      <div
+        class:list={[
+          "translate-y-0 opacity-100 transition-all duration-300 ease-out motion-reduce:transition-none",
+          index >= PAGE_SIZE && "hidden",
+        ]}
+        data-pagination-item
+      >
+        <PostCard post={post} />
+      </div>
+    ))}
+  </div>
+
+  <Pagination totalItems={posts.length} pageSize={PAGE_SIZE} />
+</Layout>

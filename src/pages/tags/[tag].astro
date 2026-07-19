@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import PostCard from "../../components/PostCard.astro";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+    (a, b) =>
+      b.data.publishedAt.getTime() - a.data.publishedAt.getTime() ||
+      a.id.localeCompare(b.id),
+  );
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts.filter((post) => post.data.tags.includes(tag)),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<Layout title={`#${tag}の記事 | Sasakiのblog`} description={`${tag}タグの記事一覧`}>
+  <section class="mb-10 rounded-2xl border border-cyan-400/15 bg-slate-900/55 p-7 backdrop-blur-md">
+    <a class="font-mono text-xs font-bold tracking-wider text-cyan-400 transition-colors hover:text-cyan-200" href="/">← ALL SIGNALS</a>
+    <h1 class="mt-5 font-mono text-4xl font-bold tracking-tight text-white">#{tag}</h1>
+    <p class="mt-2 font-mono text-xs tracking-wider text-slate-400">DETECTED: {posts.length} LOGS</p>
+  </section>
+
+  <div class="space-y-6">
+    {posts.map((post) => <PostCard post={post} activeTag={tag} />)}
+  </div>
+</Layout>

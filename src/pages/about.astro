@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../layouts/Layout.astro";
+---
+
+<BaseLayout
+  title="About"
+  description="このブログと運営者について"
+>
+  <article
+    class="
+      prose
+      prose-invert
+      mx-auto
+      max-w-3xl
+      rounded-[2rem]
+      border-2
+      border-cyan-400/15
+      bg-slate-900/60
+      p-7
+      shadow-xl
+      shadow-black/30
+      backdrop-blur-sm
+      prose-headings:tracking-tight
+      prose-headings:font-mono
+      prose-headings:text-white
+      prose-p:text-slate-300
+      prose-li:text-slate-300
+      prose-a:text-cyan-300
+    "
+  >
+    <p class="font-mono text-xs font-bold tracking-[0.24em] text-cyan-400">
+      PROFILE
+    </p>
+
+    <h1>About</h1>
+    <h2>著者について</h2>
+    <p>
+      しがないのデータエンジニア・サイエンティスト・Webエンジニアもどき。<br>
+      正直自分が己が何なのなのかよくわかっていない...
+    </p>
+
+
+    <h2>取り扱うテーマ</h2>
+
+    <ul>
+      <li>忘備録</li>
+      <li>ぬいどり</li>
+      <li>色々(適当)</li>
+    </ul>
+
+    <h2>このブログについて</h2>
+
+    <p>
+      Astroで静的HTMLを生成し、記事はMarkdownで管理。 <br>
+      フロントエンドの調査がてらに気ままに改良とかしていく予定。<br>
+      記事は気が向いたらてきとーに書きます。
+    </p>
+  </article>
+</BaseLayout>
