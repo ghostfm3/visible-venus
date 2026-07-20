@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 204 32" role="img" aria-labelledby="sasakiBlogLogoTitle">
+  <title id="sasakiBlogLogoTitle">Sasakiのblog</title>
+  <text
+    x="2"
+    y="23"
+    font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
+    font-size="20"
+    font-weight="700"
+    letter-spacing="0.6"
+    color="#ffffff"
+  ><tspan fill="#22d3ee">&lt;</tspan><tspan fill="currentColor">Sasaki</tspan><tspan fill="currentColor" font-weight="500">の</tspan><tspan fill="currentColor">blog</tspan><tspan fill="#22d3ee">/&gt;</tspan></text>
+</svg>
