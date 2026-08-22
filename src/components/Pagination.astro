@@ -10,7 +10,7 @@ const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 ---
 
 <nav
-  class="mt-10 flex items-center justify-center gap-2"
+  class="mt-10 flex items-center justify-center gap-1 border-y border-cyan-900/60 bg-[#030b1c]/70 px-2 py-3"
   aria-label="記事一覧のページ移動"
   data-pagination
   data-page-size={pageSize}
@@ -18,14 +18,14 @@ const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 >
   <button
     type="button"
-    class="rounded-full border border-cyan-400/20 bg-slate-900/70 px-4 py-2 font-mono text-xs text-cyan-200 transition-all duration-300 hover:border-cyan-300/60 hover:bg-cyan-950/50 disabled:cursor-not-allowed disabled:border-slate-800 disabled:bg-transparent disabled:text-slate-700"
+    class="border border-cyan-500/30 bg-[#020713] px-4 py-2 font-mono text-[10px] tracking-wider text-cyan-200 transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-950/50 disabled:cursor-not-allowed disabled:border-slate-800 disabled:bg-transparent disabled:text-slate-700"
     data-pagination-prev
   >← PREV</button>
 
   {pages.map((page) => (
     <button
       type="button"
-      class="flex size-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900/70 font-mono text-xs text-slate-400 transition-all duration-300 hover:border-cyan-400/50 hover:text-cyan-200 data-[active=true]:border-cyan-300 data-[active=true]:bg-cyan-400/20 data-[active=true]:text-white data-[active=true]:shadow-[0_0_18px_rgba(34,211,238,0.25)]"
+      class="flex size-8 items-center justify-center border border-slate-800 bg-[#020713] font-mono text-[10px] text-slate-400 transition-all duration-300 hover:border-cyan-400/50 hover:text-white data-[active=true]:border-cyan-300 data-[active=true]:bg-cyan-400/15 data-[active=true]:text-white data-[active=true]:shadow-[inset_0_0_8px_rgba(34,211,238,0.18),0_0_8px_rgba(34,211,238,0.15)]"
       data-pagination-page={page}
       data-active={page === 1 ? "true" : "false"}
       aria-current={page === 1 ? "page" : undefined}
@@ -34,7 +34,7 @@ const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   <button
     type="button"
-    class="rounded-full border border-cyan-400/20 bg-slate-900/70 px-4 py-2 font-mono text-xs text-cyan-200 transition-all duration-300 hover:border-cyan-300/60 hover:bg-cyan-950/50 disabled:cursor-not-allowed disabled:border-slate-800 disabled:bg-transparent disabled:text-slate-700"
+    class="border border-cyan-500/30 bg-[#020713] px-4 py-2 font-mono text-[10px] tracking-wider text-cyan-200 transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-950/50 disabled:cursor-not-allowed disabled:border-slate-800 disabled:bg-transparent disabled:text-slate-700"
     data-pagination-next
   >NEXT →</button>
 </nav>

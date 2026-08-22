@@ -11,33 +11,37 @@ const { post, activeTag, searchText } = Astro.props;
 ---
 
 <article
-  class="group relative translate-y-0 overflow-hidden rounded-2xl border border-cyan-400/15 bg-slate-900/65 p-6 opacity-100 shadow-[0_16px_50px_rgba(0,0,0,0.28)] backdrop-blur-md transition-all duration-500 ease-out starting:translate-y-4 starting:opacity-0 hover:-translate-y-1 hover:border-cyan-300/40 hover:shadow-[0_18px_60px_rgba(8,145,178,0.16)] motion-reduce:transition-none"
+  class="group relative translate-y-0 border border-cyan-500/30 bg-[#030b1c]/90 p-5 opacity-100 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.9),6px_6px_0_rgba(3,10,24,0.9)] backdrop-blur-sm transition-all duration-300 ease-out starting:translate-y-4 starting:opacity-0 hover:-translate-y-0.5 hover:border-cyan-300/70 hover:bg-[#05142a] hover:shadow-[inset_0_0_18px_rgba(8,145,178,0.06),6px_6px_0_rgba(8,145,178,0.15)] sm:p-6 motion-reduce:transition-none"
   data-search-item={searchText ? true : undefined}
   data-search-text={searchText}
 >
-  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent"></div>
-  <div class="absolute -top-16 -right-16 size-32 rounded-full bg-cyan-400/5 blur-2xl transition-colors duration-500 group-hover:bg-cyan-400/10"></div>
-  <div class="mb-4 flex items-center justify-between gap-3 font-mono">
-    <time class="text-xs tracking-[0.16em] text-cyan-400">{post.data.publishedAt.toLocaleDateString("ja-JP")}</time>
+  <span class="absolute top-0 left-0 size-3 border-t-2 border-l-2 border-cyan-300"></span>
+  <span class="absolute top-0 right-0 size-3 border-t-2 border-r-2 border-cyan-300"></span>
+  <span class="absolute bottom-0 left-0 size-3 border-b-2 border-l-2 border-cyan-300"></span>
+  <span class="absolute right-0 bottom-0 size-3 border-r-2 border-b-2 border-cyan-300"></span>
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-cyan-300/80 via-transparent to-blue-400/70"></div>
+  <div class="mb-4 flex items-center justify-between gap-3 border-b border-dashed border-cyan-900/70 pb-3 font-mono">
+    <time class="text-[10px] tracking-[0.18em] text-cyan-400">[DATE:{post.data.publishedAt.toLocaleDateString("ja-JP")}]</time>
+    <span class="flex items-center gap-1.5 text-[9px] tracking-widest text-emerald-400"><i class="size-1.5 animate-pulse bg-emerald-400"></i>PUBLIC</span>
   </div>
-  <h2 class="font-mono text-2xl font-bold tracking-tight">
-    <a class="text-slate-50 transition-colors duration-300 hover:text-cyan-200" href={`/blog/${post.id}/`}>{post.data.title}</a>
+  <h2 class="font-mono text-xl font-bold tracking-tight sm:text-2xl">
+    <a class="text-white transition-colors duration-300 before:mr-2 before:text-cyan-400 before:content-['//'] hover:text-cyan-200" href={`/blog/${post.id}/`}>{post.data.title}</a>
   </h2>
-  <p class="mt-3 leading-relaxed text-slate-400">{post.data.description}</p>
+  <p class="mt-3 text-sm leading-relaxed text-slate-300">{post.data.description}</p>
   <div class="mt-4 flex flex-wrap gap-2">
     {post.data.tags.map((tag) => (
       <a
         class:list={[
-          "rounded-full border px-2.5 py-1 font-mono text-xs transition-all duration-300 hover:-translate-y-0.5",
+          "border px-2.5 py-1 font-mono text-[10px] tracking-wider transition-all duration-300 hover:-translate-y-0.5",
           activeTag === tag
-            ? "border-cyan-300/60 bg-cyan-400/15 text-cyan-100"
-            : "border-slate-700 bg-slate-950/50 text-slate-400 hover:border-cyan-400/40 hover:text-cyan-200",
+            ? "border-cyan-300/70 bg-cyan-400/15 text-white"
+            : "border-blue-900 bg-[#020713] text-slate-300 hover:border-cyan-400/60 hover:text-white",
         ]}
         href={`/tags/${encodeURIComponent(tag)}/`}
       >#{tag}</a>
     ))}
   </div>
-  <a class="mt-5 inline-flex items-center gap-2 font-mono text-sm font-bold tracking-wider text-cyan-400 transition-all duration-300 hover:gap-3 hover:text-cyan-200" href={`/blog/${post.id}/`}>
-    詳細を見る <span aria-hidden="true">→</span>
+  <a class="mt-5 inline-flex border border-cyan-500/40 bg-cyan-950/20 px-3 py-2 font-mono text-[11px] font-bold tracking-[0.14em] text-cyan-300 transition-all duration-300 hover:border-cyan-200 hover:bg-cyan-400/10 hover:text-white" href={`/blog/${post.id}/`}>
+    [ OPEN_DATA ] <span class="ml-2" aria-hidden="true">→</span>
   </a>
 </article>

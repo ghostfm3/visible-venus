@@ -13,14 +13,14 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 ---
 
 <Layout title="Sasakiのblog">
-  <div class="mb-6 flex items-end justify-between">
+  <div class="relative mb-6 flex items-end justify-between border-l-4 border-cyan-400 bg-[#030b1c]/85 px-4 py-3 shadow-[inset_0_1px_rgba(34,211,238,0.18),inset_0_-1px_rgba(34,211,238,0.18)]">
     <div>
-      <p class="font-mono text-xs font-bold tracking-[0.24em] text-cyan-400">Article List</p>
-      <h2 class="mt-1 font-mono text-3xl font-bold text-white">記事一覧</h2>
+      <p class="font-mono text-[10px] font-bold tracking-[0.28em] text-cyan-400">DATABASE://ARTICLE_INDEX</p>
+      <h1 class="mt-1 font-mono text-2xl font-bold tracking-[0.04em] text-white sm:text-3xl">記事一覧<span class="ml-2 animate-pulse text-cyan-300">_</span></h1>
     </div>
   </div>
 
-  <div class="space-y-6" id="article-list">
+  <div class="space-y-5" id="article-list">
     {posts.map((post, index) => (
       <div
         class:list={[

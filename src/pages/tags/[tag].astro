@@ -24,10 +24,11 @@ const { tag, posts } = Astro.props;
 ---
 
 <Layout title={`#${tag}の記事 | Sasakiのblog`} description={`${tag}タグの記事一覧`}>
-  <section class="mb-10 rounded-2xl border border-cyan-400/15 bg-slate-900/55 p-7 backdrop-blur-md">
-    <a class="font-mono text-xs font-bold tracking-wider text-cyan-400 transition-colors hover:text-cyan-200" href="/">← ALL SIGNALS</a>
-    <h1 class="mt-5 font-mono text-4xl font-bold tracking-tight text-white">#{tag}</h1>
-    <p class="mt-2 font-mono text-xs tracking-wider text-slate-400">DETECTED: {posts.length} LOGS</p>
+  <section class="relative mb-8 border border-cyan-500/30 border-l-4 border-l-cyan-300 bg-[#030b1c]/90 p-6 shadow-[inset_0_0_18px_rgba(8,145,178,0.04),6px_6px_0_rgba(0,0,0,0.35)]">
+    <span class="absolute top-0 right-0 border-b border-l border-cyan-400/30 px-2 py-1 text-[8px] tracking-widest text-cyan-500">FILTER:ACTIVE</span>
+    <a class="font-mono text-[10px] font-bold tracking-wider text-cyan-400 transition-colors hover:text-white" href="/">← RETURN_INDEX</a>
+    <h1 class="mt-5 font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl">#{tag}<span class="animate-pulse text-cyan-300">_</span></h1>
+    <p class="mt-2 font-mono text-[10px] tracking-wider text-slate-400">MATCHED_RECORDS: {posts.length}</p>
   </section>
 
   <div class="space-y-6">
