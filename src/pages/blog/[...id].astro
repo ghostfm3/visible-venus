@@ -23,7 +23,7 @@ const { post, previousPost, nextPost } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title} | Simple Blog`} description={post.data.description}>
+<Layout title={`${post.data.title}`} description={post.data.description}>
   <article class="relative border border-cyan-500/30 border-t-2 border-t-cyan-300/70 bg-[#030b1c]/90 p-5 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.9),7px_7px_0_rgba(0,0,0,0.45)] backdrop-blur-sm sm:p-8">
     <span class="absolute top-0 right-0 border-b border-l border-cyan-400/30 px-2 py-1 text-[8px] tracking-widest text-cyan-500">DOC://READ_MODE</span>
     <a class="font-mono text-[10px] font-bold tracking-wider text-cyan-400 transition-colors hover:text-white" href="/">← RETURN_INDEX</a>
