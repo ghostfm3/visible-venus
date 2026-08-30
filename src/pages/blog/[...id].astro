@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import PanoramaRuntime from "../../components/PanoramaRuntime.astro";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
@@ -43,6 +44,8 @@ const { Content } = await render(post);
     <div class="prose prose-invert mt-8 max-w-none prose-headings:font-mono prose-headings:tracking-tight prose-headings:text-white prose-p:text-white/80 prose-a:text-cyan-300 prose-strong:text-white prose-li:text-white/80 prose-code:text-cyan-200">
       <Content />
     </div>
+
+    <PanoramaRuntime />
 
     <section class="mt-12 flex items-center gap-4 border border-cyan-500/25 bg-[#020713] p-5 shadow-[inset_3px_0_0_#22d3ee]">
         <img

@@ -19,3 +19,32 @@
   height: 100%;
   border: 0;
 }
+
+.panorama-embed {
+  width: 100%;
+  margin-block: 1.75rem;
+}
+
+.panorama-viewer {
+  width: 100%;
+  height: clamp(260px, 55vw, 480px);
+
+  overflow: hidden;
+
+  border: 1px solid rgb(34 211 238 / 45%);
+  background: #000;
+
+  box-shadow:
+    0 0 24px rgb(34 211 238 / 10%),
+    inset 0 0 24px rgb(34 211 238 / 5%);
+}
+
+.panorama-caption {
+  margin-top: 0.6rem;
+
+  font-family: monospace;
+  font-size: 0.75rem;
+
+  color: rgb(148 163 184);
+  text-align: center;
+}

@@ -1,0 +1,62 @@
+---
+import "@photo-sphere-viewer/core/index.css";
+---
+
+<script>
+  import { Viewer } from "@photo-sphere-viewer/core";
+
+  const panoramaAltPattern = /^360(?:°)?\s*:\s*(.*)$/i;
+
+  const images =
+    document.querySelectorAll<HTMLImageElement>("img.panorama-source");
+
+  for (const image of images) {
+    const caption = image.alt.match(panoramaAltPattern)?.[1]?.trim() ?? "";
+    const figure = document.createElement("figure");
+    const container = document.createElement("div");
+
+    figure.className = "panorama-embed not-prose";
+    container.className = "panorama-viewer";
+    container.dataset.panoramaSrc = image.currentSrc || image.src;
+    container.setAttribute("aria-label", caption || "360度画像");
+    figure.append(container);
+
+    if (caption) {
+      const figcaption = document.createElement("figcaption");
+      figcaption.className = "panorama-caption";
+      figcaption.textContent = caption;
+      figure.append(figcaption);
+    }
+
+    const parent = image.parentElement;
+    if (parent?.tagName === "P" && parent.children.length === 1) {
+      parent.replaceWith(figure);
+    } else {
+      image.replaceWith(figure);
+    }
+  }
+
+  const containers =
+    document.querySelectorAll<HTMLElement>(
+      ".panorama-viewer[data-panorama-src]"
+    );
+
+  for (const container of containers) {
+    if (container.dataset.panoramaReady === "true") {
+      continue;
+    }
+
+    const panorama = container.dataset.panoramaSrc;
+
+    if (!panorama) {
+      continue;
+    }
+
+    new Viewer({
+      container,
+      panorama,
+    });
+
+    container.dataset.panoramaReady = "true";
+  }
+</script>
