@@ -1,15 +1,55 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@theme {
+  --font-diary: "Klee One", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --font-hand: "Zen Kurenaido", "Klee One", "Yu Mincho", cursive;
+}
+
+html {
+  background: #212121;
+}
+
+body {
+  background-color: #212121;
+}
+
+.prose-diary {
+  --tw-prose-body: #f2eee8;
+  --tw-prose-headings: #ffffff;
+  --tw-prose-lead: #eee8df;
+  --tw-prose-links: #fff0e7;
+  --tw-prose-bold: #ffffff;
+  --tw-prose-counters: #ead8ca;
+  --tw-prose-bullets: #ead8ca;
+  --tw-prose-hr: rgb(255 255 255 / 35%);
+  --tw-prose-quotes: #f5f1ea;
+  --tw-prose-quote-borders: #ead8ca;
+  --tw-prose-captions: #e5dfd8;
+  --tw-prose-code: #ffffff;
+  --tw-prose-pre-code: #eee7da;
+  --tw-prose-pre-bg: rgb(70 70 70 / 45%);
+  --tw-prose-th-borders: rgb(255 255 255 / 40%);
+  --tw-prose-td-borders: rgb(255 255 255 / 24%);
+}
+
+.prose-diary h2,
+.prose-diary h3 {
+  text-decoration-line: underline;
+  text-decoration-color: rgb(255 255 255 / 32%);
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.18em;
+}
+
 .youtube-embed {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   margin-block: 1.75rem;
   overflow: hidden;
-  border: 1px solid rgb(34 211 238 / 45%);
+  border: 1px solid rgb(255 255 255 / 30%);
   background: #000;
-  box-shadow: 0 0 24px rgb(34 211 238 / 10%);
+  box-shadow: 0 5px 16px rgb(45 45 45 / 18%);
 }
 
 .youtube-embed iframe {
@@ -31,20 +71,18 @@
 
   overflow: hidden;
 
-  border: 1px solid rgb(34 211 238 / 45%);
+  border: 1px solid rgb(255 255 255 / 30%);
   background: #000;
 
-  box-shadow:
-    0 0 24px rgb(34 211 238 / 10%),
-    inset 0 0 24px rgb(34 211 238 / 5%);
+  box-shadow: 0 5px 16px rgb(45 45 45 / 18%);
 }
 
 .panorama-caption {
   margin-top: 0.6rem;
 
-  font-family: monospace;
-  font-size: 0.75rem;
+  font-family: "Klee One", "Yu Mincho", serif;
+  font-size: 0.8rem;
 
-  color: rgb(148 163 184);
+  color: rgb(255 255 255 / 70%);
   text-align: center;
 }

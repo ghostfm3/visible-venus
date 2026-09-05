@@ -25,52 +25,51 @@ const { Content } = await render(post);
 ---
 
 <Layout title={`${post.data.title}`} description={post.data.description}>
-  <article class="relative border border-cyan-500/30 border-t-2 border-t-cyan-300/70 bg-[#030b1c]/90 p-5 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.9),7px_7px_0_rgba(0,0,0,0.45)] backdrop-blur-sm sm:p-8">
-    <span class="absolute top-0 right-0 border-b border-l border-cyan-400/30 px-2 py-1 text-[8px] tracking-widest text-cyan-500">DOC://READ_MODE</span>
-    <a class="font-mono text-[10px] font-bold tracking-wider text-cyan-400 transition-colors hover:text-white" href="/">← RETURN_INDEX</a>
-    <header class="mt-6 border-b border-dashed border-cyan-800/70 pb-7">
-      <h1 class="font-mono text-3xl font-bold tracking-tight text-white sm:text-4xl"><span class="text-cyan-400">//</span> {post.data.title}</h1>
-      <time class="mt-4 block font-mono text-[10px] tracking-[0.16em] text-cyan-400">
+  <article>
+    <a class="font-hand text-sm tracking-wider text-white/70 transition-colors hover:text-white" href="/">← 記事一覧に戻る</a>
+    <header class="mt-6 border-b border-white/35 pb-7">
+      <h1 class="font-hand text-3xl font-normal tracking-wide text-white sm:text-4xl">{post.data.title}</h1>
+      <time class="mt-4 block font-hand text-sm tracking-[0.12em] text-white/65">
         {post.data.publishedAt.toLocaleDateString("ja-JP")}
       </time>
       <div class="mt-4 flex flex-wrap gap-2">
         {post.data.tags.map((tag) => (
-          <a class="border border-blue-900 bg-[#020713] px-3 py-1 font-mono text-[10px] tracking-wider text-slate-300 transition-all hover:border-cyan-400/60 hover:text-white" href={`/tags/${encodeURIComponent(tag)}/`}>
+          <a class="rounded-full border border-white/30 px-3 py-1 text-xs text-white/70 transition-all hover:border-white/70 hover:text-white" href={`/tags/${encodeURIComponent(tag)}/`}>
             #{tag}
           </a>
         ))}
       </div>
     </header>
-    <div class="prose prose-invert mt-8 max-w-none prose-headings:font-mono prose-headings:tracking-tight prose-headings:text-white prose-p:text-white/80 prose-a:text-cyan-300 prose-strong:text-white prose-li:text-white/80 prose-code:text-cyan-200">
+    <div class="prose prose-diary mt-8 max-w-none font-diary leading-8 prose-headings:font-hand prose-headings:font-normal prose-headings:tracking-wide">
       <Content />
     </div>
 
     <PanoramaRuntime />
 
-    <section class="mt-12 flex items-center gap-4 border border-cyan-500/25 bg-[#020713] p-5 shadow-[inset_3px_0_0_#22d3ee]">
+    <section class="mt-12 flex items-center gap-4 border-y border-white/25 py-5">
         <img
           src="/17695841732082.jpg"
           alt="著者のプロフィール画像"
-          class="size-12 shrink-0 border border-cyan-300/50 object-cover p-0.5 shadow-[0_0_18px_rgba(34,211,238,0.18)]"
+          class="size-12 shrink-0 rounded-full border border-white/40 object-cover"
         />
       <div>
-        <p class="font-mono text-[9px] tracking-[0.2em] text-cyan-400">AUTHOR_RECORD</p>
-        <p class="mt-1 font-mono font-bold text-white">{post.data.author}</p>
-        <p class="mt-1 text-sm text-white/70">イコちゃん親衛隊</p>
+        <p class="font-hand text-xs tracking-[0.18em] text-white/55">written by</p>
+        <p class="mt-1 font-hand text-lg text-white">{post.data.author}</p>
+        <p class="mt-1 text-sm text-white/65">イコちゃん親衛隊</p>
       </div>
     </section>
 
     <nav class="mt-8 grid gap-4 sm:grid-cols-2" aria-label="前後の記事">
       {previousPost ? (
-        <a class="border border-cyan-500/25 bg-[#020713] p-4 transition-all hover:border-cyan-300/60 hover:bg-cyan-950/30" href={`/blog/${previousPost.id}/`}>
-          <span class="font-mono text-xs text-cyan-400">← 前の記事</span>
-          <span class="mt-1 block font-mono font-bold text-slate-100">{previousPost.data.title}</span>
+        <a class="border border-white/25 p-4 transition-all hover:border-white/60" href={`/blog/${previousPost.id}/`}>
+          <span class="font-hand text-xs text-white/60">← 前の日記</span>
+          <span class="mt-1 block text-white">{previousPost.data.title}</span>
         </a>
       ) : <div />}
       {nextPost && (
-        <a class="border border-cyan-500/25 bg-[#020713] p-4 text-right transition-all hover:border-cyan-300/60 hover:bg-cyan-950/30" href={`/blog/${nextPost.id}/`}>
-          <span class="font-mono text-xs text-cyan-400">次の記事 →</span>
-          <span class="mt-1 block font-mono font-bold text-slate-100">{nextPost.data.title}</span>
+        <a class="border border-white/25 p-4 text-right transition-all hover:border-white/60" href={`/blog/${nextPost.id}/`}>
+          <span class="font-hand text-xs text-white/60">次の日記 →</span>
+          <span class="mt-1 block text-white">{nextPost.data.title}</span>
         </a>
       )}
     </nav>
