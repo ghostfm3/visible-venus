@@ -62,13 +62,13 @@ const { Content } = await render(post);
     <nav class="mt-8 grid gap-4 sm:grid-cols-2" aria-label="前後の記事">
       {previousPost ? (
         <a class="border border-white/25 p-4 transition-all hover:border-white/60" href={`/blog/${previousPost.id}/`}>
-          <span class="font-hand text-xs text-white/60">← 前の日記</span>
+          <span class="font-hand text-xs text-white/60">← 前の記事</span>
           <span class="mt-1 block text-white">{previousPost.data.title}</span>
         </a>
       ) : <div />}
       {nextPost && (
         <a class="border border-white/25 p-4 text-right transition-all hover:border-white/60" href={`/blog/${nextPost.id}/`}>
-          <span class="font-hand text-xs text-white/60">次の日記 →</span>
+          <span class="font-hand text-xs text-white/60">次の記事 →</span>
           <span class="mt-1 block text-white">{nextPost.data.title}</span>
         </a>
       )}
