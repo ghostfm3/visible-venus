@@ -53,5 +53,5 @@ function transformChildren(node) {
 }
 
 export default function remarkPanoramaEmbed() {
-  return transformChildren;
+    return transformChildren;
 }
